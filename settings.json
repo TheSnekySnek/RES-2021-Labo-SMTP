@@ -1,0 +1,31 @@
+{
+  "addressFile": "addresses.txt",
+  "messagesFile": "messages.txt",
+  "smtpHost": "localhost",
+  "smtpPort": 25000,
+  "useAuth": false,
+  "username": "",
+  "password": "",
+  "groups": [
+    {
+      "sender": "test@test.com",
+      "senderName": "Test1",
+      "size": 2
+    },
+    {
+      "sender": "test2@test.com",
+      "senderName": "Test2",
+      "size": 3
+    }
+  ],
+  "messages": [
+    {
+        "subject": "Hello",
+        "body": "abcdefg"
+    },
+    {
+        "subject": "Hello World",
+        "body": "gdzgozgbauigdouab"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ $ docker run -p 25000:25000 -p 8282:8282 mockmock
 ```
 You can change the ports to bind to the ports of your choice.
 
+You should be able to view incoming messages using the web interface at `127.0.0.1:8282`.
 
 ## Usage
 Start by clonning this repository and entering it.

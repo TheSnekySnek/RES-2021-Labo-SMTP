@@ -65,7 +65,7 @@ public class SmtpClient implements ISmtpClient{
 
         this.setTo(mail.getTo().getRecipients());
 
-        this.setDataAndSend(mail.getSubject(), mail.getBody(), mail.getFrom(), mail.getFromName());
+        this.setDataAndSend(mail.getSubject(), mail.getBody(), mail.getFrom(), mail.getFromName(), mail.getTo().getRecipients());
     }
 
     /**
@@ -180,10 +180,11 @@ public class SmtpClient implements ISmtpClient{
      * @param body mail body
      * @param from sender email
      * @param fromName sender name
+     * @param to recipients
      * @throws IOException If it failed to read the line
      * @throws Exception If the server returned an error
      */
-    private void setDataAndSend(String subject, String body, String from, String fromName) throws IOException, Exception {
+    private void setDataAndSend(String subject, String body, String from, String fromName, ArrayList<String> to) throws IOException, Exception {
         out.write("DATA\r\n");
         out.flush();
 
@@ -200,6 +201,11 @@ public class SmtpClient implements ISmtpClient{
         String b64Subject = Base64.getEncoder().encodeToString(subject.getBytes());
         out.write("Date: " + date.format(myFormatObj) + "\r\n");
         out.write("From: " + fromName +"<"+from+ ">\r\n");
+        out.write("To: " + to.get(0));
+        for(int i = 1; i < to.size(); i++){
+            out.write("," + to.get(i));
+        }
+        out.write("\r\n");
         out.write("Subject: =?utf-8?B?"+ b64Subject +"?=\r\n");
         out.write("Content-Type: text/html; charset=\"UTF-8\";\r\n\r\n");
         out.write(body +"\r\n.\r\n");
